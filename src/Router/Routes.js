@@ -2,8 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Checkout from "../Pages/Checkout";
 import Login from "../Pages/Login";
+import Orders from "../Pages/Orders";
 import Register from "../Pages/Register";
 import Shop from "../Pages/Shop";
+import PrivateRouter from "./PrivateRouter";
 
 export const Routes = createBrowserRouter([
     {
@@ -23,6 +25,10 @@ export const Routes = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/orders',
+                element: <PrivateRouter> <Orders></Orders> </PrivateRouter>
             }
         ]
     }

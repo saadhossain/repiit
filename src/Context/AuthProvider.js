@@ -9,20 +9,26 @@ const AuthProvider = ({ children }) => {
 
     //User State
     const [user, setUser] = useState()
+    //Loading State
+    const [loading, setLoading] = useState(true)
     //User Registraiton
     const userRegistration = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password);
     }
     //User SignIn
     const userSignIn = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
     //Send email verification link after signup
     const userVerification = () => {
+        setLoading(true)
         return sendEmailVerification(auth.currentUser)
     }
     //Update User after login
     const updateUser = (name, profile) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: profile
@@ -30,16 +36,18 @@ const AuthProvider = ({ children }) => {
     }
     //SignOut User
     const logOut = () => {
+        setLoading(true)
         return signOut(auth)
     }
     //Set user to a state to access it whrere need
     useEffect(()=> {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
+            setLoading(false)
         })
         return () => unSubscribe()
     },[auth])
-    const userInfo = { user, userRegistration, userSignIn, userVerification, updateUser, logOut}
+    const userInfo = { user, userRegistration, userSignIn, userVerification, updateUser, logOut, loading}
     return (
         <div>
             <AuthContext.Provider value={userInfo}>
