@@ -6,7 +6,6 @@ const Home = () => {
     const [products, setproducts] = useState([]);
     const [count, setCount] = useState(0);
     const [productPerPage, setProductPerpage] = useState(12);
-    console.log(productPerPage);
     const [currentPage, setCurrentPage] = useState(0);
     const totalPage = Math.ceil(count / productPerPage);
     useEffect(() => {
@@ -38,8 +37,7 @@ const Home = () => {
                     [...Array(totalPage).keys()].map(number => <button
                         key={number}
                         onClick={() => setCurrentPage(number)}
-                        className='bg-pri text-white py-1 px-2 rounded-md duration-300 ease-in-out hover:bg-2nd'
-
+                        className={`bg-pri text-white py-1 px-2 rounded-md duration-300 ease-in-out hover:bg-2nd ${currentPage === number ? 'bg-2nd': 'bg-pri'}`}
                     >
                         {number + 1}
                     </button>)
