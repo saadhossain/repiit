@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import { Routes } from './Router/Routes';
@@ -9,6 +10,7 @@ function App() {
       <RouterProvider router={router}>
 
       </RouterProvider>
+      <Toaster></Toaster>
     </div>
   );
 }
