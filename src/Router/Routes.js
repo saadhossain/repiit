@@ -9,7 +9,11 @@ export const Routes = createBrowserRouter([
         element: <Main></Main>,
         children: [
             { path: '/', element: <Shop></Shop>},
-            {path:'/checkout', element: <Checkout></Checkout>}
+            {
+                path:'/checkout/:id',
+                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
+                element: <Checkout></Checkout>
+            }
         ]
     }
 ])
