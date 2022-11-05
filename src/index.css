@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rapiit-btn{
+    background-color:#F62B23;
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: white;
+    margin-top:15px;
+    transition: all 0.3s ease-in-out;
+}
+.rapiit-btn:hover{
+    background-color: #3B7BF5;
+}
