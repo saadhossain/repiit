@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrderDisplay = ({ order }) => {
+const OrderDisplay = ({ order , handleOrderCancel}) => {
     const { title, thumbnail, price } = order.product;
     return (
         <div>
@@ -13,7 +13,7 @@ const OrderDisplay = ({ order }) => {
                 <h2 className='text-lg font-semibold'>Price: ${price}</h2>
                 <div className='flex gap-2 items-center'>
                     <button className='py-1 px-2 rounded bg-pri text-white font-semibold'>Payment</button>
-                    <button className='py-1 px-2 rounded bg-pri text-white font-semibold'>Cancel</button>
+                    <button onClick={()=> handleOrderCancel(order._id)} className='py-1 px-2 rounded bg-pri text-white font-semibold'>Cancel</button>
                 </div>
             </div>
         </div>
