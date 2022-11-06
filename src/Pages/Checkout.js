@@ -17,7 +17,7 @@ const Checkout = () => {
             phone: userInfo.phone,
             product,
         }
-        fetch('http://localhost:5000/orders', {
+        fetch('http://localhost:5000/orders/create', {
             method: 'POST',
             headers :{
                 'content-type': 'application/json'
