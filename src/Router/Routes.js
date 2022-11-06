@@ -12,10 +12,10 @@ export const Routes = createBrowserRouter([
         path: '/',
         element: <Main></Main>,
         children: [
-            { path: '/', element: <Shop></Shop>},
+            { path: '/', element: <Shop></Shop> },
             {
-                path:'/checkout/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
+                path: '/checkout/:id',
+                loader: ({ params }) => fetch(`https://repiit-server.vercel.app/products/${params.id}`),
                 element: <Checkout></Checkout>
             },
             {

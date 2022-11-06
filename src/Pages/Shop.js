@@ -9,7 +9,7 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const totalPage = Math.ceil(count / productPerPage);
     useEffect(() => {
-        fetch(`http://localhost:5000/products?currentPage=${currentPage}&productPerPage=${productPerPage}`)
+        fetch(`https://repiit-server.vercel.app/products?currentPage=${currentPage}&productPerPage=${productPerPage}`)
             .then(res => res.json())
             .then(data => {
                 setproducts(data.products);
@@ -37,7 +37,7 @@ const Home = () => {
                     [...Array(totalPage).keys()].map(number => <button
                         key={number}
                         onClick={() => setCurrentPage(number)}
-                        className={`bg-pri text-white py-1 px-2 rounded-md duration-300 ease-in-out hover:bg-2nd ${currentPage === number ? 'bg-2nd': 'bg-pri'}`}
+                        className={`bg-pri text-white py-1 px-2 rounded-md duration-300 ease-in-out hover:bg-2nd ${currentPage === number ? 'bg-2nd' : 'bg-pri'}`}
                     >
                         {number + 1}
                     </button>)

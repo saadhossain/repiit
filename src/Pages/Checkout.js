@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useLoaderData, useNavigate} from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 const Checkout = () => {
     const [product] = useLoaderData();
@@ -17,27 +17,27 @@ const Checkout = () => {
             phone: userInfo.phone,
             product,
         }
-        fetch('http://localhost:5000/orders/create', {
+        fetch('https://repiit-server.vercel.app/orders/create', {
             method: 'POST',
-            headers :{
+            headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(orderInfo)
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.acknowledged){
-                toast.success('Order Placed Successful')
-                navigate('/orders')
-            }
-        })
-        .catch(err => console.error(err))
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Order Placed Successful')
+                    navigate('/orders')
+                }
+            })
+            .catch(err => console.error(err))
     }
     const handleOrderInfo = (e) => {
         e.preventDefault()
         const field = e.target.name;
         const value = e.target.value;
-        const newOrderInfo = {...userInfo}
+        const newOrderInfo = { ...userInfo }
         newOrderInfo[field] = value;
         setUserInfo(newOrderInfo)
     }

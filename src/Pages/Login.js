@@ -19,7 +19,7 @@ const Login = () => {
                     email: user.email
                 }
                 toast.success('Login Successfully')
-                fetch('http://localhost:5000/getaccesstoken', {
+                fetch('https://repiit-server.vercel.app/getaccesstoken', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
