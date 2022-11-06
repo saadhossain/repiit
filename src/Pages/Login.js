@@ -1,11 +1,10 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 
 const Login = () => {
-    const {userSignIn} = useContext(AuthContext)
+    const { userSignIn } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/'
@@ -14,13 +13,27 @@ const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         userSignIn(email, password)
-        .then((result)=> {
-            const user = result.user;
-            console.log(user);
-            toast.success('Login Successfully')
-            navigate(from, {replace:true})
-        })
-        .catch(err => console.error(err))
+            .then((result) => {
+                const user = result.user;
+                const currentUser = {
+                    email: user.email
+                }
+                toast.success('Login Successfully')
+                fetch('http://localhost:5000/getaccesstoken', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('Access_Token', data.token);
+                        //then do other actin like navigate
+                        navigate(from, { replace: true })
+                    })
+            })
+            .catch(err => console.error(err))
     }
     return (
         <div className='flex justify-center my-5'>

@@ -5,12 +5,21 @@ import { AuthContext } from '../Context/AuthProvider';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
-    const { user } = useContext(AuthContext);
+    const { user , logOut} = useContext(AuthContext);
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user.email}`)
-            .then(res => res.json())
+        fetch(`http://localhost:5000/orders?email=${user.email}`, {
+            headers: {
+                'authorization' : `Bearer ${localStorage.getItem('Access_Token')}`
+            }
+        })
+            .then(res => {
+                if(res.status === 401 || res.status === 403){
+                    return logOut()
+                }
+                return res.json()
+            })
             .then(data => setOrders(data))
-    }, [user.email])
+    }, [user?.email, logOut])
 
     //Handle Order Cancellation
     const handleOrderCancel = (id) => {

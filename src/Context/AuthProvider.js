@@ -37,6 +37,7 @@ const AuthProvider = ({ children }) => {
     //SignOut User
     const logOut = () => {
         setLoading(true)
+        localStorage.removeItem('Access_Token')
         return signOut(auth)
     }
     //Set user to a state to access it whrere need
