@@ -31,6 +31,29 @@ const Orders = () => {
                 .catch(err => console.error(err))
         }
     }
+    //Handle Payment
+    const handlePayment = (id) => {
+        console.log('payment approved for', id);
+        fetch(`http://localhost:5000/orders/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({status: 'Paid'})
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.modifiedCount > 0){
+                toast.success('Payment Complete')
+                const remaining = orders.filter (order => order._id !== id);
+                const paid = orders.find(order => order._id === id);
+                paid.status = 'Paid';
+                const updatedOrders = [paid, ...remaining]
+                setOrders(updatedOrders)
+            }
+        })
+        .catch(err => console.error(err))
+    }
     return (
         <div className='w-11/12 md:w-2/4 mx-auto my-5 min-h-[50vh]'>
             <h1 className='text-2xl font-bold text-pri text-center mb-5'>{orders.length ? `Total Orders: ${orders.length}` : 'No Orders Found'}</h1>
@@ -40,6 +63,7 @@ const Orders = () => {
                         key={order._id}
                         order={order}
                         handleOrderCancel={handleOrderCancel}
+                        handlePayment={handlePayment}
                     ></OrderDisplay>)
                 }
             </div>

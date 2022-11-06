@@ -5,7 +5,6 @@ const Footer = () => {
         <div className='bg-[#122033] py-5 mt-5'>
             <div className='w-11/12 md:w-10/12 mx-auto grid md:grid-cols-4'>
                 <div className='flex flex-col gap-3'>
-                    <h1 className='text-2xl font-semibold text-white'>Repiit Shop</h1>
                     <img src={logo} alt='' className='h-12 w-32'/>
                     <ul className='text-white'>
                         <li>Electronics</li>
