@@ -11,7 +11,7 @@ const OrderDisplay = ({ order, handleOrderCancel, handlePayment }) => {
                     <p>Quantity: 1</p>
                 </div>
                 <h2 className='text-lg font-semibold'>Price: ${price}</h2>
-                <div className='flex gap-2 items-center'>
+                <div className='flex flex-col md:flex-row gap-2 items-end md:items-center justify-between'>
                     <label onClick={()=> handlePayment(order._id)} htmlFor="payment-modal" className={`py-1 px-2 rounded ${order.status ? 'bg-green-700': 'bg-pri'} text-white font-semibold cursor-pointer`}>{order.status ? order.status : 'Payment'}</label>
                     <button onClick={() => handleOrderCancel(order._id)} className='py-1 px-2 rounded bg-pri text-white font-semibold'>Cancel</button>
                 </div>
